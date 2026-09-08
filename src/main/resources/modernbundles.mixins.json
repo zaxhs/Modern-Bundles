@@ -1,0 +1,21 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "dev.modernbundles.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "BundleContentsMixin",
+    "BundleItemMixin",
+    "ShapelessRecipeMixin"
+  ],
+  "client": [
+    "client.AbstractContainerScreenMixin",
+    "client.CreativeModeInventoryScreenMixin",
+    "client.GuiGraphicsMixin",
+    "client.ItemInHandRendererMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
+

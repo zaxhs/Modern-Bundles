@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "modernbundles:item/light_blue_bundle"
+  }
+}
+
+
+

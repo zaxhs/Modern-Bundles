@@ -1,0 +1,24 @@
+Modern Bundles - Third-Party Notices
+
+This project is substantially derived from Back with the Bundle by Sythiex
+(MIT License, Copyright (c) 2026 Sythiex). Its NeoForge integration, bundle
+selection, tooltip, scrolling, interaction, networking, tests, and visual
+assets formed the primary implementation base. See LICENSE.
+
+Bundle Backport-ish by Josiah Fu was consulted as a secondary behavioral
+reference for dye crafting and selected-item removal (MIT License, Copyright
+(c) 2024 Josiah Fu). See LICENSE_BundleBackportish.
+
+This distribution includes a limited set of assets originating from
+Minecraft: Java Edition 1.21.5, carried forward from Back with the Bundle to
+provide modern bundle visuals on Minecraft: Java Edition 1.21.1.
+
+Minecraft and those assets are owned by Mojang AB and/or Microsoft. They are
+not covered by either MIT license. Use is subject to the Minecraft End User
+License Agreement and Minecraft Usage Guidelines:
+
+https://www.minecraft.net/eula
+https://www.minecraft.net/usage-guidelines
+
+NOT AN OFFICIAL MINECRAFT PRODUCT. NOT APPROVED BY OR ASSOCIATED WITH MOJANG
+OR MICROSOFT.

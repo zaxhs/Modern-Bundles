@@ -1,0 +1,7 @@
+{
+  "parent": "modernbundles:item/template_bundle_open_back",
+  "textures": {
+    "layer0": "modernbundles:item/yellow_bundle_open_back"
+  }
+}
+

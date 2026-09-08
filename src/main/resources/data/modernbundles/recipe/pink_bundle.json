@@ -1,0 +1,2 @@
+{"type":"minecraft:crafting_shapeless","category":"misc","group":"modernbundles:dye_bundle","ingredients":[{"item":"minecraft:bundle"},{"item":"minecraft:pink_dye"}],"result":{"id":"minecraft:bundle","count":1,"components":{"minecraft:custom_data":{"modernbundles":{"color":"pink"}},"minecraft:custom_model_data":7,"minecraft:custom_name":"\"Pink Bundle\""}}}
+

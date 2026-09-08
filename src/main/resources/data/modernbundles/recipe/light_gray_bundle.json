@@ -1,0 +1,2 @@
+{"type":"minecraft:crafting_shapeless","category":"misc","group":"modernbundles:dye_bundle","ingredients":[{"item":"minecraft:bundle"},{"item":"minecraft:light_gray_dye"}],"result":{"id":"minecraft:bundle","count":1,"components":{"minecraft:custom_data":{"modernbundles":{"color":"light_gray"}},"minecraft:custom_model_data":9,"minecraft:custom_name":"\"Light Gray Bundle\""}}}
+

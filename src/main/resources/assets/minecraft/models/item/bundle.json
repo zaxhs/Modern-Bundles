@@ -1,0 +1,21 @@
+{
+  "parent": "modernbundles:item/bundle",
+  "overrides": [
+    { "predicate": { "custom_model_data": 1 }, "model": "modernbundles:item/white_bundle" },
+    { "predicate": { "custom_model_data": 2 }, "model": "modernbundles:item/orange_bundle" },
+    { "predicate": { "custom_model_data": 3 }, "model": "modernbundles:item/magenta_bundle" },
+    { "predicate": { "custom_model_data": 4 }, "model": "modernbundles:item/light_blue_bundle" },
+    { "predicate": { "custom_model_data": 5 }, "model": "modernbundles:item/yellow_bundle" },
+    { "predicate": { "custom_model_data": 6 }, "model": "modernbundles:item/lime_bundle" },
+    { "predicate": { "custom_model_data": 7 }, "model": "modernbundles:item/pink_bundle" },
+    { "predicate": { "custom_model_data": 8 }, "model": "modernbundles:item/gray_bundle" },
+    { "predicate": { "custom_model_data": 9 }, "model": "modernbundles:item/light_gray_bundle" },
+    { "predicate": { "custom_model_data": 10 }, "model": "modernbundles:item/cyan_bundle" },
+    { "predicate": { "custom_model_data": 11 }, "model": "modernbundles:item/purple_bundle" },
+    { "predicate": { "custom_model_data": 12 }, "model": "modernbundles:item/blue_bundle" },
+    { "predicate": { "custom_model_data": 13 }, "model": "modernbundles:item/brown_bundle" },
+    { "predicate": { "custom_model_data": 14 }, "model": "modernbundles:item/green_bundle" },
+    { "predicate": { "custom_model_data": 15 }, "model": "modernbundles:item/red_bundle" },
+    { "predicate": { "custom_model_data": 16 }, "model": "modernbundles:item/black_bundle" }
+  ]
+}

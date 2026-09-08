@@ -1,0 +1,2 @@
+{"type":"minecraft:crafting_shapeless","category":"misc","group":"modernbundles:dye_bundle","ingredients":[{"item":"minecraft:bundle"},{"item":"minecraft:white_dye"}],"result":{"id":"minecraft:bundle","count":1,"components":{"minecraft:custom_data":{"modernbundles":{"color":"white"}},"minecraft:custom_model_data":1,"minecraft:custom_name":"\"White Bundle\""}}}
+
