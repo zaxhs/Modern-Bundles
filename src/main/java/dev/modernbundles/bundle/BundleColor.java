@@ -99,9 +99,10 @@ public enum BundleColor {
 
     public static ItemStack apply(ItemStack source, BundleColor color) {
         Optional<BundleColor> previousColor = fromBundle(source);
-        Component currentName = source.get(DataComponents.CUSTOM_NAME);
-        boolean replaceName = currentName == null
-            || previousColor.map(previous -> previous.generatedName().equals(currentName.getString())).orElse(false);
+        Component customName = source.get(DataComponents.CUSTOM_NAME);
+        boolean legacyGeneratedCustomName = source.get(DataComponents.ITEM_NAME) == null
+            && customName != null
+            && previousColor.map(previous -> previous.generatedName().equals(customName.getString())).orElse(false);
 
         CustomData.update(DataComponents.CUSTOM_DATA, source, root -> {
             CompoundTag namespace = root.getCompound(NAMESPACE_KEY);
@@ -109,8 +110,9 @@ public enum BundleColor {
             root.put(NAMESPACE_KEY, namespace);
         });
         source.set(DataComponents.CUSTOM_MODEL_DATA, new CustomModelData(color.modelData()));
-        if (replaceName) {
-            source.set(DataComponents.CUSTOM_NAME, Component.literal(color.generatedName()));
+        source.set(DataComponents.ITEM_NAME, Component.literal(color.generatedName()));
+        if (legacyGeneratedCustomName) {
+            source.remove(DataComponents.CUSTOM_NAME);
         }
         return source;
     }

@@ -12,5 +12,5 @@ Selection and drag payloads are optional and are sent only when the active
 connection advertises the corresponding channel. Full modern scrolling and
 selected extraction therefore activate only when both sides have the mod.
 
-See `REPORT.md` for the architecture, validation evidence, limitations, and
-manual compatibility matrix.
+Bundles work in normal 1.21.1 worlds without manually enabling the vanilla
+Bundles experiment. See `CHANGELOG.md` for release notes.

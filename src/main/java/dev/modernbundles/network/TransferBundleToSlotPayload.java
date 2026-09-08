@@ -3,6 +3,7 @@ package dev.modernbundles.network;
 import java.util.List;
 
 import dev.modernbundles.ModernBundles;
+import dev.modernbundles.bundle.BundleSnapshot;
 
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -16,13 +17,15 @@ public record TransferBundleToSlotPayload(int containerId, int slotIndex, List<I
     public static final Type<TransferBundleToSlotPayload> TYPE = new Type<>(
         ResourceLocation.fromNamespaceAndPath(ModernBundles.MODID, "transfer_bundle_to_slot")
     );
+    private static final StreamCodec<RegistryFriendlyByteBuf, List<ItemStack>> EXPECTED_CONTENTS_STREAM_CODEC =
+        ItemStack.OPTIONAL_STREAM_CODEC.apply(ByteBufCodecs.list(BundleSnapshot.MAX_CONTENT_STACKS));
     public static final StreamCodec<RegistryFriendlyByteBuf, TransferBundleToSlotPayload> STREAM_CODEC =
         StreamCodec.composite(
             ByteBufCodecs.VAR_INT,
             TransferBundleToSlotPayload::containerId,
             ByteBufCodecs.VAR_INT,
             TransferBundleToSlotPayload::slotIndex,
-            ItemStack.OPTIONAL_LIST_STREAM_CODEC,
+            EXPECTED_CONTENTS_STREAM_CODEC,
             TransferBundleToSlotPayload::expectedContents,
             TransferBundleToSlotPayload::new
         );

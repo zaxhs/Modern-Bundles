@@ -164,6 +164,9 @@ tasks.named('jar', Jar).configure {
         into 'META-INF'
         rename { packagedNoticeName }
     }
+    from(rootProject.file('LICENSE_BackWithTheBundle')) {
+        into 'META-INF'
+    }
     from(rootProject.file('LICENSE_BundleBackportish')) {
         into 'META-INF'
     }

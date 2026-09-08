@@ -7,17 +7,16 @@ import javax.annotation.Nullable;
 import dev.modernbundles.bundle.BundleTooltipData;
 import dev.modernbundles.client.BundleTooltipLayout;
 
-import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.BundleContents;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
@@ -48,9 +47,9 @@ public final class ClientBundleTooltip implements ClientTooltipComponent {
     private static final int PROGRESSBAR_MARGIN_Y = 4;
     private static final int TOOLTIP_BOTTOM_MARGIN = 4;
 
-    private static final Component BUNDLE_FULL_TEXT = Component.translatable("item.minecraft.bundle.full");
-    private static final Component BUNDLE_EMPTY_TEXT = Component.translatable("item.minecraft.bundle.empty");
-    private static final Component BUNDLE_EMPTY_DESCRIPTION = Component.translatable("item.minecraft.bundle.empty.description");
+    private static final Component BUNDLE_FULL_TEXT = Component.translatable("modernbundles.bundle.full");
+    private static final Component BUNDLE_EMPTY_TEXT = Component.translatable("modernbundles.bundle.empty");
+    private static final Component BUNDLE_EMPTY_DESCRIPTION = Component.translatable("modernbundles.bundle.empty.description");
 
     private final BundleContents contents;
     private final int selectedItem;
@@ -215,16 +214,18 @@ public final class ClientBundleTooltip implements ClientTooltipComponent {
     private void drawSelectedItemTooltip(Font font, GuiGraphics guiGraphics, int x, int y) {
         if (this.selectedItem >= 0 && this.selectedItem < this.contents.size()) {
             ItemStack selectedStack = this.contents.getItemUnsafe(this.selectedItem);
-            MutableComponent name = Component.empty()
-                .append(selectedStack.getHoverName())
-                .withStyle(selectedStack.getRarity().getStyleModifier());
-            if (selectedStack.has(DataComponents.CUSTOM_NAME)) {
-                name.withStyle(ChatFormatting.ITALIC);
-            }
+            Component name = getVanillaStyledName(selectedStack);
             int nameWidth = font.width(name.getVisualOrderText());
             int center = x + this.layout.gridWidth() / 2 - BundleTooltipLayout.SLOT_SIZE / 2;
             guiGraphics.renderTooltip(font, name, center - nameWidth / 2, y - 15);
         }
+    }
+
+    private static Component getVanillaStyledName(ItemStack stack) {
+        Minecraft minecraft = Minecraft.getInstance();
+        TooltipFlag flag = minecraft.options.advancedItemTooltips ? TooltipFlag.ADVANCED : TooltipFlag.NORMAL;
+        List<Component> lines = stack.getTooltipLines(Item.TooltipContext.of(minecraft.level), minecraft.player, flag);
+        return lines.isEmpty() ? stack.getHoverName() : lines.getFirst();
     }
 
     private void drawProgressbar(int x, int y, Font font, GuiGraphics guiGraphics) {

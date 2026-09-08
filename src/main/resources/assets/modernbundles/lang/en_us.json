@@ -1,0 +1,5 @@
+{
+  "modernbundles.bundle.empty": "Empty",
+  "modernbundles.bundle.empty.description": "Can hold a mixed stack of items",
+  "modernbundles.bundle.full": "Full"
+}

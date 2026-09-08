@@ -35,10 +35,14 @@ public final class ModNetworking {
 
     private static void handleSelectBundleItem(SelectBundleItemPayload payload, IPayloadContext context) {
         if (context.player() instanceof ServerPlayer player) {
+            if (!PacketRateLimiter.allowSelection(player)) {
+                return;
+            }
+
             AbstractContainerMenu menu = player.containerMenu;
             if (player.isSpectator() || !menu.stillValid(player)) {
                 SelectionAuthority.clear(player);
-                menu.broadcastFullState();
+                resyncIfAllowed(player);
                 return;
             }
 
@@ -59,7 +63,7 @@ public final class ModNetworking {
                 );
             } else {
                 SelectionAuthority.clear(player);
-                menu.broadcastFullState();
+                resyncIfAllowed(player);
             }
         }
     }
@@ -68,16 +72,19 @@ public final class ModNetworking {
         if (!(context.player() instanceof ServerPlayer player)) {
             return;
         }
+        if (!PacketRateLimiter.allowTransfer(player)) {
+            return;
+        }
 
         AbstractContainerMenu menu = player.containerMenu;
         if (player.isSpectator() || !menu.stillValid(player)) {
-            menu.broadcastFullState();
+            resyncIfAllowed(player);
             return;
         }
 
         if (!BundleSnapshot.matches(menu.getCarried(), payload.expectedContents())
             || !BundleSlotTransferRequest.isMatchingTarget(menu, payload.containerId(), payload.slotIndex())) {
-            menu.broadcastFullState();
+            resyncIfAllowed(player);
             return;
         }
 
@@ -87,7 +94,7 @@ public final class ModNetworking {
         }
 
         if (!BundleSlotTransferRequest.canApply(menu, player, payload.containerId(), payload.slotIndex())) {
-            menu.broadcastFullState();
+            resyncIfAllowed(player);
             return;
         }
 
@@ -100,7 +107,13 @@ public final class ModNetworking {
             );
             menu.broadcastChanges();
         } else {
-            menu.broadcastFullState();
+            resyncIfAllowed(player);
+        }
+    }
+
+    private static void resyncIfAllowed(ServerPlayer player) {
+        if (PacketRateLimiter.allowResync(player)) {
+            player.containerMenu.broadcastFullState();
         }
     }
 

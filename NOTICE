@@ -1,9 +1,12 @@
 Modern Bundles - Third-Party Notices
 
+Modern Bundles is Copyright (c) 2026 zaxhs and is distributed under the MIT
+License. See LICENSE.
+
 This project is substantially derived from Back with the Bundle by Sythiex
 (MIT License, Copyright (c) 2026 Sythiex). Its NeoForge integration, bundle
 selection, tooltip, scrolling, interaction, networking, tests, and visual
-assets formed the primary implementation base. See LICENSE.
+assets formed the primary implementation base. See LICENSE_BackWithTheBundle.
 
 Bundle Backport-ish by Josiah Fu was consulted as a secondary behavioral
 reference for dye crafting and selected-item removal (MIT License, Copyright

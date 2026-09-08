@@ -3,6 +3,7 @@ package dev.modernbundles.network;
 import java.util.List;
 
 import dev.modernbundles.ModernBundles;
+import dev.modernbundles.bundle.BundleSnapshot;
 
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -21,6 +22,8 @@ public record SelectBundleItemPayload(
     public static final Type<SelectBundleItemPayload> TYPE = new Type<>(
         ResourceLocation.fromNamespaceAndPath(ModernBundles.MODID, "select_bundle_item")
     );
+    private static final StreamCodec<RegistryFriendlyByteBuf, List<ItemStack>> EXPECTED_CONTENTS_STREAM_CODEC =
+        ItemStack.OPTIONAL_STREAM_CODEC.apply(ByteBufCodecs.list(BundleSnapshot.MAX_CONTENT_STACKS));
     public static final StreamCodec<RegistryFriendlyByteBuf, SelectBundleItemPayload> STREAM_CODEC = StreamCodec.composite(
         ByteBufCodecs.VAR_INT,
         SelectBundleItemPayload::containerId,
@@ -28,7 +31,7 @@ public record SelectBundleItemPayload(
         SelectBundleItemPayload::slotIndex,
         ByteBufCodecs.VAR_INT,
         SelectBundleItemPayload::selectedItemIndex,
-        ItemStack.OPTIONAL_LIST_STREAM_CODEC,
+        EXPECTED_CONTENTS_STREAM_CODEC,
         SelectBundleItemPayload::expectedContents,
         SelectBundleItemPayload::new
     );
